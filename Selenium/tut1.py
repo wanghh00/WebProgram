@@ -16,6 +16,37 @@ baseurl = "http://69.248.94.79/test/hello.html"
 #js = "window.onerror = function(msg, url, line_num) { document.write('hehe...'); return false; }"
 js = "var s=window.document.createElement('script'); s.src='ttt.js'; window.document.head.appendChild(s);"
 
+#before is from http://mrselenium.blogspot.com/2012/02/getting-console-errors-from-browser.html
+js = "var win = selenium.browserbot.getUserWindow();\
+win.errors = win.errors || [];\
+win.errorsJson = win.errorsJson || \"\";\
+win.originalonerror = win.originalonerror || win.onerror ||\"none\";\
+win.onerror = function(errorMsg, url, lineNumber) { \
+    win.errors.push({\"errorMsg\": errorMsg || \"\",\"url\": url || \"\",\"lineNumber\": lineNumber || \"\"});\
+    if (JSON &&JSON.stringify) win.errorsJson = JSON.stringify(win.errors); \
+    if (win.originalonerror != \"none\") win.originalonerror(errorMsg, url, lineNumber);\
+};\
+win.console = {\
+    logs: win.console.logs || [],\
+    logsJson: win.console.logsJson || \"\",\
+    log: function() {\
+        win.console.logs.push(arguments);\
+        if (JSON && JSON.stringify) win.console.logsJson = JSON.stringify(win.console.logs);\
+    },\
+    warns: win.console.warns || [],\
+    warnsJson: win.console.warnsJson || \"\",\
+    warn: function() {\
+        win.console.warns.push(arguments); \
+        if (JSON && JSON.stringify) win.console.warnsJson = JSON.stringify(win.console.warns);\
+    },\
+    errors: win.console.errors || [],\
+    errorsJson: win.console.errorsJson || \"\",\
+    error: function() { \
+        win.console.errors.push(arguments);\
+        if (JSON && JSON.stringify) win.console.errorsJson = JSON.stringify(win.console.errors);\
+    }\
+};"
+
 username = "admin"
 password = "admin"
 
@@ -27,10 +58,11 @@ xpaths = { 'usernameTxtBox' : "//input[@name='username']",
 mydriver = webdriver.Firefox()
 #mydriver.maximize_window()
 
-print mydriver.execute_script(js)
+#print mydriver.execute_script(js)
 
 mydriver.get(baseurl)
 
+#print mydriver.execute_script(js)
 
 time.sleep(3)
 
