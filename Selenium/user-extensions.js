@@ -72,4 +72,7 @@ PageBot.prototype.locateElementByValueRepeated = function(text, inDocument) {
     return null;
 };
 
-
+Selenium.prototype.doScrollDown = function(locator) { 
+    var element = this.browserbot.findElement(locator); 
+    element.scrollTop = element.scrollHeight; 
+}; 
