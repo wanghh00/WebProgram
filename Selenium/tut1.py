@@ -17,7 +17,8 @@ baseurl = "http://69.248.94.79/test/hello.html"
 js = "var s=window.document.createElement('script'); s.src='ttt.js'; window.document.head.appendChild(s);"
 
 #before is from http://mrselenium.blogspot.com/2012/02/getting-console-errors-from-browser.html
-js = "var win = selenium.browserbot.getUserWindow();\
+#js = "var win = selenium.browserbot.getUserWindow();\
+js = "var win = window;\
 win.errors = win.errors || [];\
 win.errorsJson = win.errorsJson || \"\";\
 win.originalonerror = win.originalonerror || win.onerror ||\"none\";\
@@ -47,6 +48,10 @@ win.console = {\
     }\
 };"
 
+#js = "return 5;"
+#js = "return typeof(selenium.browserbot);"
+
+
 username = "admin"
 password = "admin"
 
@@ -58,11 +63,13 @@ xpaths = { 'usernameTxtBox' : "//input[@name='username']",
 mydriver = webdriver.Firefox()
 #mydriver.maximize_window()
 
-#print mydriver.execute_script(js)
+print mydriver.execute_script(js)
+print mydriver.execute_script('return window.console;')
 
 mydriver.get(baseurl)
 
-#print mydriver.execute_script(js)
+print
+print mydriver.execute_script('return window.console;')
 
 time.sleep(3)
 
