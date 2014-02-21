@@ -1,0 +1,40 @@
+<html>
+<head>
+<script src="qediag.js"></script>
+<script>
+function loadXMLDoc() {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("myDiv").innerHTML = '<i>'+xmlhttp.responseText+'</i>';
+        }
+    }
+    xmlhttp.open("GET","data.txt",true);
+    xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<h2>AJAX Request</h2>
+<p>Click the button to generate a AJAX request</p>
+<button type="button" onclick="loadXMLDoc()">Ajax Request</button>
+<p>Below Content will from the Call</p>
+<div id="myDiv"></div>
+
+<h2>JS Error</h2>
+<p>Generate a JS error using below script:</p>
+<p>document.write(<font color='blue' size=+2>"</font>Hello World!);</p>
+<script type="text/javascript">
+    document.write('Hello World!);
+</script>
+
+</body>
+</html>
