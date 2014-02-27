@@ -1,6 +1,7 @@
 <html>
 <head>
 <script src="qediag.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 function loadXMLDoc() {
     var xmlhttp;
@@ -29,6 +30,27 @@ function loadXMLDoc() {
 <p>Below Content will from the Call</p>
 <div id="myDiv"></div>
 
+<h2>JSONP Request</h2>
+<div id="images"></div>
+<script>
+(function() {
+  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  $.getJSON( flickerAPI, {
+    tags: "mount rainier",
+    tagmode: "any",
+    format: "json"
+  })
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+        if ( i === 3 ) {
+          return false;
+        }
+      });
+    });
+})();
+</script>
+ 
 <h2>JS Error</h2>
 <p>Generate a JS error using below script:</p>
 <p>document.write(<font color='blue' size=+2>"</font>Hello World!);</p>
