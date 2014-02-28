@@ -1,0 +1,2 @@
+XPath:
+'//div[@class="top"]//a[starts-with(@href,"http:")]/@href' # xpath return attributes text

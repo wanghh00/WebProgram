@@ -18,5 +18,6 @@ window.onerror = function(msg, url, line_num) {
     objDiag.lstJsErr.push(msg + ' <' + url + ':' + line_num+'>');
     return false;
 }
-window.addEventListener('DOMNodeInserted', objDiag.jsonp_req, false);
+//window.addEventListener('DOMNodeInserted', objDiag.jsonp_req, false);
+document.getElementsByTagName("head")[0].addEventListener('DOMNodeInserted', objDiag.jsonp_req, false);
 
