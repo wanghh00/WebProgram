@@ -1,0 +1,8 @@
+*.JSON
+*.dump
+*.log
+*.TEXT
+*.txt
+*.pyc
+*.bak
+*.json
